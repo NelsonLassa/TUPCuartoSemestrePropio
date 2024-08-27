@@ -1,4 +1,4 @@
-package UTN;
+package UTN.presentacion;
 
 import UTN.datos.EstudianteDAO;
 import UTN.conexion.Conexion;
@@ -8,7 +8,7 @@ import UTN.dominio.Estudiante;
 import javax.swing.*;
 import java.util.List;
 
-public class Main {
+public class SistemaEstudianteApp {
     public static void main(String[] args) {
         var conexion = Conexion.getConnection();
         if (conexion != null)
@@ -49,6 +49,7 @@ public class Main {
                     break;
             }
         } while (seleccion != "Salir");
+        JOptionPane.showMessageDialog(null, "Hasta luego vuelva pronto");
     }
 
     public static void Listar() {

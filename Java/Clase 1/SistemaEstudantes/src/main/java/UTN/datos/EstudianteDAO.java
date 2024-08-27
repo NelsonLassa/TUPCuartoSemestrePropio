@@ -28,7 +28,7 @@ public class EstudianteDAO {
             while (rs.next()) {
                 var estudiante = new Estudiante();
                 estudiante.setIdEstudiante(rs.getInt("idestudiantes2024"));
-                //estudiante.setIdEstuduiante(rs.getInt("idestudiante2022"));
+                //estudiante.setIdEstudiante(rs.getInt("idestudiante2022"));
                 estudiante.setNombre(rs.getString("nombre"));
                 estudiante.setApellido(rs.getString("apellido"));
                 estudiante.setTelfono(rs.getString("telefono"));
