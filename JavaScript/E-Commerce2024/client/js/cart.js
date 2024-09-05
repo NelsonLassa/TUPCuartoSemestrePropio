@@ -47,16 +47,62 @@ const displayCart = () => {
         </div>
         `;
     modalContainer.append(modalBody);
+
+    // Funcion para disminuir la cantidad de productos por el boton -
+    const decrese = modalBody.querySelector(".quantity-btn-decrese");
+    decrese.addEventListener("click", () => {
+      // Si el producto tiene productos distintos de 1 resta
+      if (productos.quanty !== 1) {
+        productos.quanty--;
+        // Llamamos a la función nuevamente para actualizar su contenido
+        displayCart();
+      }
+    });
+    // Funcion para aumentar la cantidad de productos por el boton +
+    const increse = modalBody.querySelector(".quantity-btn-increse");
+    increse.addEventListener("click", () => {
+      productos.quanty++;
+      // Llamamos a la función nuevamente para actualizar su contenido
+      displayCart();
+    });
+
+    // Funcion para eleminar el producto por el boton ❌
+    const deleteProducto = modalBody.querySelector(".delete-product");
+
+    deleteProducto.addEventListener("click", () => {
+      deleteCartProduct(productos.id);
+    });
+
   });
 
   // modal footer
 
+  // Funcion que recorre con reduce y recibe 2 parametros el
+  // acc = que es el acumulador
+  // el representa a cada uno de los productos
+
+  const total = cart.reduce((acc, el) =>
+    acc + // donde se van guardando los resultados calculados
+    el.price * el.quanty, // que es lo que va a calcular
+    0 // donde inicia el conteo 
+  );
+
+
   const modalFooter = document.createElement("div");
   modalFooter.className = "modal-footer";
   modalFooter.innerHTML = `
-    <div class="total-price"> Totla :)</div>
+    <div class="total-price"> Total $ ${total}.00</div>
     `;
 
   modalContainer.append(modalFooter);
 };
+
 cartBtn.addEventListener("click", displayCart);
+
+
+const deleteCartProduct = (id) => {
+  const founId = cart.findIndex((element) => element.id === id);
+  console.log(founId);
+  cart.splice(founId , 1);
+  displayCart();
+};
