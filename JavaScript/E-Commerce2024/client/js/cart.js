@@ -2,6 +2,7 @@ const modalOverlay = document.getElementById("modal-overlay");
 const modalContainer = document.getElementById("modal-container");
 
 const cartBtn = document.getElementById("cart-btn");
+const cartCounter = document.getElementById("cart-counter");
 
 const displayCart = () => {
   modalContainer.innerHTML = "";
@@ -26,6 +27,9 @@ const displayCart = () => {
   modalHeder.append(modalTitlte);
 
   modalContainer.append(modalHeder);
+
+  if(cart.length>0){
+
 
   // Modal Body
   cart.forEach((productos) => {
@@ -56,6 +60,8 @@ const displayCart = () => {
         productos.quanty--;
         // Llamamos a la función nuevamente para actualizar su contenido
         displayCart();
+        displayCartCounter();
+
       }
     });
     // Funcion para aumentar la cantidad de productos por el boton +
@@ -64,6 +70,7 @@ const displayCart = () => {
       productos.quanty++;
       // Llamamos a la función nuevamente para actualizar su contenido
       displayCart();
+      displayCartCounter();
     });
 
     // Funcion para eleminar el producto por el boton ❌
@@ -95,6 +102,12 @@ const displayCart = () => {
     `;
 
   modalContainer.append(modalFooter);
+}else{
+  const modalText = document.createElement("h2");
+  modalText.className = "modal-body";
+  modalText.innerHTML = "Tu carrito esta vacio";
+  modalContainer.append(modalText);
+}
 };
 
 cartBtn.addEventListener("click", displayCart);
@@ -103,6 +116,18 @@ cartBtn.addEventListener("click", displayCart);
 const deleteCartProduct = (id) => {
   const founId = cart.findIndex((element) => element.id === id);
   console.log(founId);
-  cart.splice(founId , 1);
+  cart.splice(founId, 1);
   displayCart();
+  displayCartCounter();
 };
+
+const displayCartCounter = () => {
+  const cartLength = cart.reduce((acc, el) => acc + el.quanty, 0);
+  if (cartLength > 0) {
+    cartCounter.style.display = "block";
+    cartCounter.innerText = cartLength;
+  } else {
+    cartCounter.style.display = "none";
+  }
+
+}

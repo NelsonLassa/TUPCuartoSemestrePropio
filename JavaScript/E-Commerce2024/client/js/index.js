@@ -20,23 +20,25 @@ productos.forEach((product) => {
         // devuelve true si es verdadero
         const repeat = cart.some((repeatProduct) => repeatProduct.id === product.id);
         if (repeat) {
-            cart.map((prod) =>{
-                if(prod.id === product.id){
-                    prod.quanty++; 
+            cart.map((prod) => {
+                if (prod.id === product.id) {
+                    prod.quanty++;
+                    displayCartCounter();
                 }
 
             })
-        }else{
+        } else {
             cart.push({
                 id: product.id,
                 productName: product.productName,
                 price: product.price,
                 quanty: product.quanty,
                 img: product.img,
-    
-            })
+
+            });
+            displayCartCounter();
         }
-        
+
         console.log(cart)
     })
 
