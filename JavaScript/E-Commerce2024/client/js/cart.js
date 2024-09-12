@@ -99,6 +99,8 @@ const displayCart = () => {
   modalFooter.className = "modal-footer";
   modalFooter.innerHTML = `
     <div class="total-price"> Total $ ${total}.00</div>
+    <button class="btn-primary" id = "checkout-btn"> go to checkout</button>
+    <div id= "button-checkout"></div>
     `;
 
   modalContainer.append(modalFooter);
