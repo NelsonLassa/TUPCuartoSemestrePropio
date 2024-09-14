@@ -101,6 +101,7 @@ const displayCart = () => {
     <div class="total-price"> Total $ ${total}.00</div>
     <button class="btn-primary" id = "checkout-btn"> go to checkout</button>
     <div id= "button-checkout"></div>
+     <div id="wallet_container"></div>
     `;
 
   modalContainer.append(modalFooter);
