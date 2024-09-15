@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+const config = require('./config');
 
 // SDK de Mercado Pago
 import { MercadoPagoConfig, Perference } from "mercadopago";
