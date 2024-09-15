@@ -8,7 +8,7 @@ import e from "cors";
 
 // Agrega credenciales
 const client = new MercadoPagoConfig({
-    accessToken: "",
+    accessToken: `${config.Access_Token}`,
 });
 
 const app = express();
