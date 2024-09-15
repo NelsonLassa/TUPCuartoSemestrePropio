@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
-const config = require('./config');
+import { config } from './config.js'; // Ajustado para importar desde config.mjs
 
 // SDK de Mercado Pago
-import { MercadoPagoConfig, Perference } from "mercadopago";
-import e from "cors";
+import pkg from "mercadopago";
+const { MercadoPagoConfig, Preference } = pkg;
 
 // Agrega credenciales
 const client = new MercadoPagoConfig({
@@ -40,7 +40,7 @@ app.post("/create_preference", async (req, res) => {
             auto_return: "approved",
         };
 
-        const preference = new Perference(client);
+        const preference = new Preference(client);
         const result = await preference.create({body});
         res.json({
             id: result.id,
@@ -48,11 +48,11 @@ app.post("/create_preference", async (req, res) => {
     }catch (error){
         console.log(error);
         res.status(500).json({
-            error: " Error al creal la preferencia",
+            error: "Error al crear la preferencia",
         });
     }
 });
 
 app.listen(port, ()=>{
-    console.log(``)
+    console.log(`Servidor corriendo en el puerto ${port}`);
 })
