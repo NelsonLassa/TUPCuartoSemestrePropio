@@ -1,5 +1,4 @@
-import { load } from "mime";
-const config = require('./config');
+
 const modalOverlay = document.getElementById("modal-overlay");
 const modalContainer = document.getElementById("modal-container");
 
@@ -24,10 +23,10 @@ const displayCart = () => {
     modalOverlay.style.display = "none";
   });
 
-  const modalTitlte = document.createElement("div");
-  modalTitlte.innerText = "Carrito";
-  modalTitlte.className = "modal-title";
-  modalHeder.append(modalTitlte);
+  const modalTitle = document.createElement("div");
+  modalTitle.innerText = "Carrito";
+  modalTitle.className = "modal-title";
+  modalHeder.append(modalTitle);
 
   modalContainer.append(modalHeder);
 
@@ -46,7 +45,7 @@ const displayCart = () => {
                 </div>
             <div class="quantity">
                 <span class="quantity-btn-decrese">-</span>
-                <span class="quantity-input">${productos.quanty}</sapn>
+                <span class="quantity-input">${productos.quanty}</span>
                 <span class="quantity-btn-increse">+</span>
             </div>
                 <div class="price">${productos.price * productos.quanty} $</div>
@@ -90,12 +89,7 @@ const displayCart = () => {
     // acc = que es el acumulador
     // el representa a cada uno de los productos
 
-    const total = cart.reduce((acc, el) =>
-      acc + // donde se van guardando los resultados calculados
-      el.price * el.quanty, // que es lo que va a calcular
-      0 // donde inicia el conteo 
-    );
-
+    const total = cart.reduce((acc, el) => acc + el.price * el.quanty, 0);
 
     const modalFooter = document.createElement("div");
     modalFooter.className = "modal-footer";
@@ -106,15 +100,16 @@ const displayCart = () => {
     `;
 
     modalContainer.append(modalFooter);
-    // mp
+
     //Public key
-    const mp = new Mercado(`${config.Public_key}`, {
+    const mp = new MercadoPago('TEST-b1d3285e-3ee7-443c-b4c0-8bc06b13efb3', {
       locale: "es-AR",
     });
 
+
     // funcion que genra un titulo con la info del carrito
-    const generateCartDescription =()=>{
-      return cart.map(productos =>`${productos.productName} (x${productos.quanty})`).join(", ");
+    const generateCartDescription = () => {
+      return cart.map(productos => `${productos.productName} (x${productos.quanty})`).join(', ');
     };
 
     document.getElementById("checkout-btn").addEventListener("click", async () => {
@@ -125,7 +120,7 @@ const displayCart = () => {
           price: total,
         };
 
-        const response = await fetch("hhtp://localhost:3000/create_prefence", {
+        const response = await fetch("http://localhost:3000/create_preference", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -140,29 +135,28 @@ const displayCart = () => {
     });
 
 
-    const createCheckoutButton = (preferentId) =>{
+    const createCheckoutButton = (preferentId) => {
       const bricksBuilder = mp.bricks();
 
-      const renderComponent = async () =>{
-        if(window.CheckoutButton) window.checkoutButton.unmount();
+      const renderComponent = async () => {
+        if (window.CheckoutButton) window.checkoutButton.unmount();
 
-        await bricksBuilder.create("wallet","wallet_container",{
-          initilaization:{
+        await bricksBuilder.create("wallet", "wallet_container", {
+          initialization: {
             preferentId: preferentId,
           },
         });
-      }
+      };
+
+      renderComponent();
     };
 
-
-    renderComponent();
-
-  } else {
-    const modalText = document.createElement("h2");
-    modalText.className = "modal-body";
-    modalText.innerHTML = "Tu carrito esta vacio";
-    modalContainer.append(modalText);
-  }
+      } else {
+        const modalText = document.createElement("h2");
+        modalText.className = "modal-body";
+        modalText.innerHTML = "Tu carrito esta vacio";
+        modalContainer.append(modalText);
+      }
 };
 
 cartBtn.addEventListener("click", displayCart);
@@ -184,5 +178,4 @@ const displayCartCounter = () => {
   } else {
     cartCounter.style.display = "none";
   }
-
-}
+};

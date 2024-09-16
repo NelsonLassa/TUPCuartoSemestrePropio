@@ -1,15 +1,19 @@
 import express from "express";
 import cors from "cors";
-import { config } from './config.js'; // Ajustado para importar desde config.mjs
+import { config } from './config.js'; // Ajustado para importar desde config.js
+
+
+//! Agrega credenciales
+// const client = new MercadoPagoConfig({
+//     accessToken: `${config.Access_Token}`,
+// });
 
 // SDK de Mercado Pago
-import pkg from "mercadopago";
-const { MercadoPagoConfig, Preference } = pkg;
-
+import { MercadoPagoConfig, Preference } from 'mercadopago';
 // Agrega credenciales
 const client = new MercadoPagoConfig({
-    accessToken: `${config.Access_Token}`,
-});
+     accessToken: 'TEST-457543137110437-091419-a56f162b4f9654b7615444968795a698-749050862',
+     });
 
 const app = express();
 const port = 3000;
@@ -20,22 +24,22 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("Server app ;)");
 })
-
+ // todo alert
 app.post("/create_preference", async (req, res) => {
     try {
         const body = {
             items: [
                 {
-                    title: req.body.description,
-                    unit_price: Number(req.body.price),
+                    title: req.body.title,
                     quantity: Number(req.body.quantity),
+                    unit_price: Number(req.body.price),
                     currency_id: "ARS",
                 },
             ],
             back_urls: {
-                "success": "http://localhost:8080",
-                "failure": "http://localhost:8080",
-                "pending": ""
+                "success": "http://www.youtube.com/@onthecode",
+                "failure": "http://www.youtube.com/@onthecode",
+                "pending": "http://www.youtube.com/@onthecode",
             },
             auto_return: "approved",
         };

@@ -25,7 +25,6 @@ productos.forEach((product) => {
                     prod.quanty++;
                     displayCartCounter();
                 }
-
             })
         } else {
             cart.push({
