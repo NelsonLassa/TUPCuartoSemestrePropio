@@ -1,4 +1,3 @@
-
 const modalOverlay = document.getElementById("modal-overlay");
 const modalContainer = document.getElementById("modal-container");
 
@@ -119,7 +118,7 @@ const displayCart = () => {
           quantity: 1,
           price: total,
         };
-
+        console.log(`${orderData.title} ${orderData.price} ${orderData.quantity}`);
         const response = await fetch("http://localhost:3000/create_preference", {
           method: "POST",
           headers: {
@@ -135,7 +134,8 @@ const displayCart = () => {
     });
 
 
-    const createCheckoutButton = (preferentId) => {
+    const createCheckoutButton = (preferenceId) => {
+      console.log(preferenceId);
       const bricksBuilder = mp.bricks();
 
       const renderComponent = async () => {
@@ -143,7 +143,7 @@ const displayCart = () => {
 
         await bricksBuilder.create("wallet", "wallet_container", {
           initialization: {
-            preferentId: preferentId,
+            preferenceId: preferenceId,
           },
         });
       };
