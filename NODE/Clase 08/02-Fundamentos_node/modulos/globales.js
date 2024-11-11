@@ -33,4 +33,7 @@
 
 //require();
 
-console.log(__filename);
+//console.log(__filename);
+
+global.miVariable = 'mi variable global';
+console.log(miVariable);
