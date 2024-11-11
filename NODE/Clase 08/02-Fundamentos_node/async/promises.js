@@ -5,10 +5,8 @@ function hola(nombre){
             resolve(nombre);
         }, 1000);
     });
-   
-
 }
-
+ 
 function hablar(nombre){
     return new Promise( (resolve, reject) => { // Usamos las sintaxis ES6
         setTimeout(function() {
