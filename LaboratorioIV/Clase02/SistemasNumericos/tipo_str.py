@@ -1,11 +1,15 @@
-# Profundizando en el tipo string
-# Concatenación automática en Pÿthon
 import math
+# Profundizando en el tipo str
+# Concatenacion automatica en Python
 
-variable = 'chau'
-mensaje = 'Hola ''Alumnos ' + variable
+
+variable = ' Adios'
+mensaje = 'Hola'' alumnos' + variable
 mensaje += ', Terminamos'
-# print(mensaje)
+#print(mensaje)
 
-# Usamos la clase help para ayuda o documentación (built-in)
+# Metodo Help
+
+#Usamos la clas ehelp para ayuda o dicumentacion (built-in)
+help(str.capitalize) # Se ejecuta para entrar a la documentacion de la clase help
 help(math.isnan)

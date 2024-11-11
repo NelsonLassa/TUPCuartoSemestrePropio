@@ -1,14 +1,14 @@
 import math
 from decimal import Decimal
 
-# NaN (Not a Number)
+# NaN (Not A Number)
 a = float('nan')
 print(f'a: {a}')
 
-# Módulo math
+#Modulo math
 a = float('nan')
-print(f'Es de tipo NaN(Not a Number)?: {math.isnan(a)}')
+print(f'Es de tipo NaN (Not A Number): {math.isnan(a)}')
 
-# Módulo decimal
+#Modulo decimal
 a = Decimal('nan')
-print(f'Es de tipo NaN(Not a Number)?: {math.isnan(a)}')
+print(f'Es de tipo NaN (Not A Number): {math.isnan(a)}')
